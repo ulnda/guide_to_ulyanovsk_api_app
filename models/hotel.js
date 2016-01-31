@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('Hotel', {
+  let Hotel = sequelize.define('Hotel', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true
@@ -27,5 +27,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DOUBLE,
       defaultValue: 0
     }
+  }, {
+    classMethods: {
+      associate: function(db) {
+        Hotel.hasMany(db.Comment, {
+          foreignKey: 'commentable_id',
+          scope: {
+            commentable: 'hotel'
+          }
+        });
+      }
+    }
   });
+
+  return Hotel;
 };
