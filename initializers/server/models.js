@@ -16,18 +16,7 @@ function syncModels(server) {
   });
 }
 
-function startServer(server) {
-  server.start((err) => {
-    if (err) {
-      throw err;
-    }
-
-    console.log('Server running at:', server.info.uri);
-  });
-}
-
 module.exports = (server) => {
   addModelsToRequest(server);
   syncModels(server);
-  startServer(server);
 }

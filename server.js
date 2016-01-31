@@ -2,14 +2,8 @@
 
 const Hapi = require('hapi');
 
-const PlacesRoutes = require('./routes/places');
-const HotelsRoutes = require('./routes/hotels');
-
 const server = new Hapi.Server();
 server.connection(require('./configs/server_connection'));
-
-server.route(PlacesRoutes);
-server.route(HotelsRoutes);
 
 server.register(
   [
@@ -20,7 +14,9 @@ server.register(
       throw err;
     }
 
-    require('./initializers/server')(server);
+    require('./initializers/server/models')(server);
+    require('./initializers/server/routes')(server);
+    require('./initializers/server/starting')(server);
   }
 );
 
