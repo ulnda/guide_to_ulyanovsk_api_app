@@ -14,10 +14,33 @@ server.connection({
 server.route(PlacesRoutes);
 server.route(HotelsRoutes);
 
-server.start((err) => {
-  if (err) {
-    throw err;
+const sequalizePlugin = {
+  register: require('hapi-sequelize'),
+  options: {
+    database: 'guide_to_ulyanovsk',
+    user: 'guide_to_ulyanovsk',
+    pass: 'guide123',
+    dialect: 'postgres',
+    port: 5432
   }
+};
 
-  console.log('Server running at:', server.info.uri);
-});
+server.register(
+  [
+    sequalizePlugin
+  ], 
+  (err) => {
+    if (err) {
+      throw err;
+    }
+
+    server.start((err) => {
+      if (err) {
+        throw err;
+      }
+
+      console.log('Server running at:', server.info.uri);
+    });
+  }
+);
+

@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/ulnda/guide_to_ulyanovsk_api_app#readme",
   "dependencies": {
-    "hapi": "^12.1.0"
+    "hapi": "^12.1.0",
+    "hapi-sequelize": "^2.2.4",
+    "pg": "^4.4.4",
+    "sequelize": "^3.18.0"
   }
 }
