@@ -5,7 +5,9 @@ module.exports = [
     method: 'GET',
     path: baseRoute,
     handler: function(request, reply) {
-      return reply({result: 'index'});
+      request.models.Place.findAll().then((places) => {
+        reply(places);
+      });
     }
   },
   {
