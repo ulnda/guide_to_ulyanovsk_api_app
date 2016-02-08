@@ -3,14 +3,15 @@
 module.exports = (sequelize, DataTypes) => {
   let Place = sequelize.define('Place', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    lat: {
+    latitude: {
       type: DataTypes.DOUBLE,
       allowNull: false
     },
-    lng: {
+    longitude: {
       type: DataTypes.DOUBLE,
       allowNull: false
     },

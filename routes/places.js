@@ -14,14 +14,20 @@ module.exports = [
     method: 'POST',
     path: baseRoute,
     handler: function(request, reply) {
-      return reply({result: 'created'});
+      request.models.Place.create(request.payload).then((place) => {
+        reply(place);
+      });
     }
   },
   {
     method: 'DELETE',
     path: `${baseRoute}/{id}`,
     handler: function(request, reply) {
-      return reply({result: 'deleted ' + request.params.id});
+      request.models.Place.findById(request.params.id).then((place) => {
+        return place.destroy();
+      }).then(() => {
+        reply({result: 'ok'});
+      });
     }
   },
   {

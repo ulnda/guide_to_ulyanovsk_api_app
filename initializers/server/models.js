@@ -4,6 +4,7 @@ function addModelsToRequest(server) {
   server.ext('onPreHandler', function (modelCollections) {
     return (request, reply) => {
       request.models = modelCollections;
+      console.log(request.params);
       reply.continue();
     }
   }(server.plugins['hapi-sequelize'].db.sequelize.models));
