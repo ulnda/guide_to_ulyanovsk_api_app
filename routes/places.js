@@ -11,11 +11,20 @@ module.exports = [
     }
   },
   {
+    method: 'GET',
+    path: `${baseRoute}/{id}`,
+    handler: function(request, reply) {
+      request.models.Place.findById(request.params.id).then((place) => {
+        reply(place);
+      });
+    }
+  },
+  {
     method: 'POST',
     path: baseRoute,
     handler: function(request, reply) {
       request.models.Place.create(request.payload).then((place) => {
-        reply(place);
+        reply({result: 'ok'});
       });
     }
   },
@@ -34,7 +43,11 @@ module.exports = [
     method: 'PUT',
     path: `${baseRoute}/{id}`,
     handler: function(request, reply) {
-      return reply({result: 'updated ' + request.params.id});
+      request.models.Place.findById(request.params.id).then((place) => {
+        return place.update(request.payload);
+      }).then(() => {
+        reply({result: 'ok'});
+      });
     }
   },
 ];
