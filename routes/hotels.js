@@ -30,6 +30,9 @@ module.exports = [
       request.models.Hotel.create(request.payload).then((hotel) => {
         let imageBuffer = imageLib.decodeBase64Image(request.payload.croppedImage);
         let imagePath = `images/hotels/${hotel.id}.${imageBuffer.type}`;
+        if (!fs.existsSync('public/images/hotels')){
+            fs.mkdirSync('public/images/hotels');
+        }
         fs.writeFile(`public/${imagePath}`, imageBuffer.data, function(err) { 
           reply({result: 'ok'});
           hotel.image = imagePath;
