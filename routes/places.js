@@ -30,6 +30,9 @@ module.exports = [
       request.models.Place.create(request.payload).then((place) => {
         let imageBuffer = imageLib.decodeBase64Image(request.payload.croppedImage);
         let imagePath = `images/places/${place.id}.${imageBuffer.type}`;
+        if (!fs.existsSync('public/images/places')){
+            fs.mkdirSync('public/images/places');
+        }
         fs.writeFile(`public/${imagePath}`, imageBuffer.data, function(err) { 
           reply({result: 'ok'});
           place.image = imagePath;
