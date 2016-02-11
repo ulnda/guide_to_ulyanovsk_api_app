@@ -1,0 +1,1 @@
+"use strict";var _module=angular.module("app.places.services",[]);_module.factory("Place",["$resource","API_BASE_ENDPOINT","API_PLACES_ENDPOINT",function(e,a,t){var r=e(a+t,{id:"@id"},{headers:{"Content-Type":"application/json"},update:{method:"PUT"}});return r.prototype.getImageUrl=function(){return a+"/"+this.image},r}]),_module.value("API_PLACES_ENDPOINT","/places/:id");

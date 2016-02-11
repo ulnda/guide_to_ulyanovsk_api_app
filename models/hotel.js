@@ -3,20 +3,20 @@
 module.exports = (sequelize, DataTypes) => {
   let Hotel = sequelize.define('Hotel', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    lat: {
+    latitude: {
       type: DataTypes.DOUBLE,
       allowNull: false
     },
-    lng: {
+    longitude: {
       type: DataTypes.DOUBLE,
       allowNull: false
     },
     title: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false
     },
     description: {
@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     rating: {
       type: DataTypes.DOUBLE,
       defaultValue: 0
+    },
+    image: {
+      type: DataTypes.STRING
     }
   }, {
     classMethods: {

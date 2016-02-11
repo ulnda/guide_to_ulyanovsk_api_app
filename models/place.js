@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false
     },
     description: {
@@ -27,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     rating: {
       type: DataTypes.DOUBLE,
       defaultValue: 0
+    },
+    image: {
+      type: DataTypes.STRING
     }
   }, {
     classMethods: {

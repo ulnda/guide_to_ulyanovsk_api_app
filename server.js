@@ -7,7 +7,8 @@ server.connection(require('./configs/server_connection'));
 
 server.register(
   [
-    require('./configs/sequelize_plugin')
+    require('./configs/sequelize_plugin'),
+    require('inert')
   ], 
   (err) => {
     if (err) {

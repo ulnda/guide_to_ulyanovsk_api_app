@@ -1,4 +1,8 @@
+'use strict';
+
 const baseRoute = '/places';
+const imageLib = require('../libs/images');
+const fs = require('fs');
 
 module.exports = [
   {
@@ -24,7 +28,13 @@ module.exports = [
     path: baseRoute,
     handler: function(request, reply) {
       request.models.Place.create(request.payload).then((place) => {
-        reply({result: 'ok'});
+        let imageBuffer = imageLib.decodeBase64Image(request.payload.croppedImage);
+        let imagePath = `images/places/${place.id}.${imageBuffer.type}`;
+        fs.writeFile(`public/${imagePath}`, imageBuffer.data, function(err) { 
+          reply({result: 'ok'});
+          place.image = imagePath;
+          place.save();
+        });
       });
     }
   },
@@ -33,6 +43,7 @@ module.exports = [
     path: `${baseRoute}/{id}`,
     handler: function(request, reply) {
       request.models.Place.findById(request.params.id).then((place) => {
+        fs.unlinkSync(`public/${place.image}`);
         return place.destroy();
       }).then(() => {
         reply({result: 'ok'});
@@ -46,7 +57,19 @@ module.exports = [
       request.models.Place.findById(request.params.id).then((place) => {
         return place.update(request.payload);
       }).then(() => {
-        reply({result: 'ok'});
+        if (request.payload.croppedImage) {
+          let imageBuffer = imageLib.decodeBase64Image(request.payload.croppedImage);
+          let imagePath = `images/places/${place.id}.${imageBuffer.type}`;
+          fs.unlinkSync(`public/${place.image}`);
+          fs.writeFile(`public/${imagePath}`, imageBuffer.data, function(err) { 
+            reply({result: 'ok'});
+            place.image = imagePath;
+            place.save();
+          });
+        }
+        else {
+          reply({result: 'ok'});
+        }
       });
     }
   },

@@ -1,0 +1,1 @@
+"use strict";var _module=angular.module("app.hotels.services",[]);_module.factory("Hotel",["$resource","API_BASE_ENDPOINT","API_HOTELS_ENDPOINT",function(e,t,o){var r=e(t+o,{id:"@id"},{headers:{"Content-Type":"application/json"},update:{method:"PUT"}});return r.prototype.getImageUrl=function(){return t+"/"+this.image},r}]),_module.value("API_HOTELS_ENDPOINT","/hotels/:id");

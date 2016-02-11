@@ -19,6 +19,7 @@
   "dependencies": {
     "hapi": "^12.1.0",
     "hapi-sequelize": "^2.2.4",
+    "inert": "^3.2.0",
     "pg": "^4.4.4",
     "sequelize": "^3.18.0"
   }
