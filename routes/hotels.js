@@ -46,7 +46,9 @@ module.exports = [
     path: `${baseRoute}/{id}`,
     handler: function(request, reply) {
       request.models.Hotel.findById(request.params.id).then((hotel) => {
-        fs.unlinkSync(`public/${hotel.image}`);
+        if (fs.existsSync(`public/${hotel.image}`)){
+          fs.unlinkSync(`public/${hotel.image}`);
+        }
         return hotel.destroy();
       }).then(() => {
         reply({result: 'ok'});
