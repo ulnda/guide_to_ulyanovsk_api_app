@@ -1,6 +1,6 @@
 module.exports = {
-  host: 'localhost',
-  port: 8000,
+  host: '0.0.0.0',
+  port: +process.env.PORT,
   routes: {
     cors: true
   }
