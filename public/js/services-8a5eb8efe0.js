@@ -1,1 +1,1 @@
-"use strict";var baseUrl="http://localhost:8000",_module=angular.module("app.services",[]);_module.value("API_BASE_ENDPOINT",baseUrl);
+"use strict";var baseUrl="",_module=angular.module("app.services",[]);_module.value("API_BASE_ENDPOINT",baseUrl);
